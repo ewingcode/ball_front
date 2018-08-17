@@ -6,7 +6,7 @@ import store from "@/tools/store.js"
 // axios 配置
 axios.defaults.timeout = 10000;
 //axios.defaults.baseURL = 'http://127.0.0.1:8090';
-axios.defaults.baseURL ='http://webserver.frp.56zhongchao.com:9191'
+axios.defaults.baseURL ='http://39.108.88.149:8090'
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 let clientId = "unity-client";
 let secretKey ="123321";

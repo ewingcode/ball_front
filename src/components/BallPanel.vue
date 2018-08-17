@@ -142,10 +142,10 @@
   }
 </script>
 <style lang="less">
-  @import '../../../node_modules/vux/src/styles/weui/widget/weui_cell/weui_cell_global';
-  @import '../../../node_modules/vux/src/styles/weui/widget/weui_cell/weui_access';
-  @import '../../../node_modules/vux/src/styles/weui/widget/weui_panel/weui_panel';
-  @import '../../../node_modules/vux/src/styles/weui/widget/weui_media_box/weui_media_box';
+  @import '../../node_modules/vux/src/styles/weui/widget/weui_cell/weui_cell_global';
+  @import '../../node_modules/vux/src/styles/weui/widget/weui_cell/weui_access';
+  @import '../../node_modules/vux/src/styles/weui/widget/weui_panel/weui_panel';
+  @import '../../node_modules/vux/src/styles/weui/widget/weui_media_box/weui_media_box';
 </style>
 
 <style>

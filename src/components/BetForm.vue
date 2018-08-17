@@ -248,7 +248,7 @@
 </script>
 
 <style lang="less">
-  @import '../../../node_modules/vux/src/styles/weui/widget/weui_cell/weui_form/weui-form-preview.less';
+  @import '../../node_modules/vux/src/styles/weui/widget/weui_cell/weui_form/weui-form-preview.less';
   .vux-form-preview {
     overflow: hidden;
   }
