@@ -175,8 +175,8 @@
         this.money = money;
       },
       confirmEvent(money){
-        if(money<50 || money>100){
-          this.showErrTip("单注超过投注额度（50至100）");
+        if(money<50 || money>500){
+          this.showErrTip("单注超过投注额度（50至500）");
           return;
         }
         if(!this.bkPreOrderViewResp){
