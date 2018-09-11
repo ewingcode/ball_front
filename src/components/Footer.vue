@@ -16,13 +16,17 @@
         <img slot="icon" src="../assets/demo/icon_nav_article.png">
         <span slot="label">账单</span>
       </tabbar-item>
+    <tabbar-item :selected="selected[4]">
+      <img slot="icon" src="../assets/demo/icon_nav_article.png">
+      <span slot="label">设置</span>
+    </tabbar-item>
     </tabbar>
 </template>
 
 <script>
   import { Tabbar, TabbarItem,TransferDom  } from "vux";
 
-  let navs = ["roll", "today",  "currentbill" ,"billhistory"];
+  let navs = ["roll", "today",  "currentbill" ,"billhistory","setting"];
 
   export default {
     name: "AppFooter",

@@ -7,6 +7,7 @@ import Today from '../components/Today'
 import BillHistory from '../components/BillHistory'
 import DailyBill from '../components/DailyBill'
 import CurrentBill from '../components/CurrentBill'
+import Setting from '../components/Setting'
 Vue.use(VueRouter);
 
 const routes = [{
@@ -70,7 +71,14 @@ const routes = [{
   meta: {
     requireAuth: true
   }
-}]
+},{
+    path: '/setting',
+    name:"setting",
+    component: Setting,
+    meta: {
+      requireAuth: true
+    }
+  }]
 
 const router = new VueRouter({
   routes
