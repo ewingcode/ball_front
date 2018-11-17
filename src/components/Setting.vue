@@ -38,7 +38,7 @@
     }, methods: {
       onchangeAutoBuyIsEff(value){
         let iseff = value?'1':'0';
-        if(this.money && this.money>500){
+        if(this.money && this.money>2000){
             return;
         }
         this.axios({
