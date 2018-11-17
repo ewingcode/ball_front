@@ -4,7 +4,7 @@ import router from "@/tools/router.js"
 import store from "@/tools/store.js"
 
 // axios 配置
-axios.defaults.timeout = 10000;
+axios.defaults.timeout = 30000;
 //axios.defaults.baseURL = 'http://127.0.0.1:8090';
 axios.defaults.baseURL =process.env.API_ROOT
 //axios.defaults.baseURL ='http://39.108.88.149:8090'
