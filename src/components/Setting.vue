@@ -9,6 +9,12 @@
     <group >
       <x-input title='投注金额'  v-model="money"></x-input>
     </group>
+    <group >
+      <x-input title='追加场数'  v-model="continueMaxMatch"></x-input>
+    </group>
+    <group>
+      <x-switch title="是否测试" v-model="isTest"></x-switch>
+    </group>
   </div>
 </template>
 
@@ -26,7 +32,9 @@
       return {
         autoBuyIsEff: false,
         phone:"",
-        money:"100"
+        money:"100",
+        isTest: false,
+        continueMaxMatch:"0"
       }
     },
     created: function () {
@@ -38,6 +46,7 @@
     }, methods: {
       onchangeAutoBuyIsEff(value){
         let iseff = value?'1':'0';
+        let istest = this.isTest?'1':'0';
         if(this.money && this.money>2000){
             return;
         }
@@ -48,7 +57,9 @@
             "account": this.$store.state.account,
             "iseff":iseff,
             "phone": this.phone,
-            "money": this.money
+            "money": this.money,
+            "isTest":istest,
+            "continueMaxMatch":this.continueMaxMatch
           }
         })
           .then(function (response) {
@@ -70,6 +81,12 @@
               if(data){
                 this.phone = data.phone;
                 this.money = data.money;
+                this.continueMaxMatch=data.continueMaxMatch;
+              }
+              if(data && data.isTest=='1'){
+                this.isTest = true;
+              }else{
+                this.isTest = false;
               }
               if(data && data.iseff=='1'){
                 this.autoBuyIsEff = true;
