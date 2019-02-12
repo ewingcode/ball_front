@@ -13,7 +13,7 @@
       <x-input title='追加场数'  v-model="continueMaxMatch"></x-input>
     </group>
     <group >
-      <x-input title='连输第几场开始追加2'  v-model="continueStartLostnum"></x-input>
+      <x-input title='连输第几场开始追加'  v-model="continueStartLostnum"></x-input>
     </group>
     <group>
       <x-switch title="是否测试" v-model="isTest"></x-switch>
