@@ -12,6 +12,9 @@
     <group >
       <x-input title='追加场数'  v-model="continueMaxMatch"></x-input>
     </group>
+    <group >
+      <x-input title='连输第几场开始追加2'  v-model="continueStartLostnum"></x-input>
+    </group>
     <group>
       <x-switch title="是否测试" v-model="isTest"></x-switch>
     </group>
@@ -34,7 +37,9 @@
         phone:"",
         money:"100",
         isTest: false,
+        continueStartLostnum:"1",
         continueMaxMatch:"0"
+
       }
     },
     created: function () {
@@ -59,7 +64,8 @@
             "phone": this.phone,
             "money": this.money,
             "isTest":istest,
-            "continueMaxMatch":this.continueMaxMatch
+            "continueMaxMatch":this.continueMaxMatch,
+            "continueStartLostnum":this.continueStartLostnum
           }
         })
           .then(function (response) {
@@ -81,7 +87,10 @@
               if(data){
                 this.phone = data.phone;
                 this.money = data.money;
+                if(data.continueMaxMatch)
                 this.continueMaxMatch=data.continueMaxMatch;
+                if(data.continueStartLostnum)
+                 this.continueStartLostnum=data.continueStartLostnum;
               }
               if(data && data.isTest=='1'){
                 this.isTest = true;
