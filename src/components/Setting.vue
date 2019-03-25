@@ -15,6 +15,12 @@
     <group >
       <x-input title='连输第几场开始追加'  v-model="continueStartLostnum"></x-input>
     </group>
+    <group >
+      <x-input title='赢多少则停止下注'  v-model="stopWingold"></x-input>
+    </group>
+    <group >
+      <x-input title='输多少则停止下注'  v-model="stopLosegold"></x-input>
+    </group>
     <group>
       <x-switch title="是否测试" v-model="isTest"></x-switch>
     </group>
@@ -38,7 +44,9 @@
         money:"100",
         isTest: false,
         continueStartLostnum:"1",
-        continueMaxMatch:"0"
+        continueMaxMatch:"0",
+        stopWingold:"0",
+        stopLosegold:"0"
 
       }
     },
@@ -65,7 +73,9 @@
             "money": this.money,
             "isTest":istest,
             "continueMaxMatch":this.continueMaxMatch,
-            "continueStartLostnum":this.continueStartLostnum
+            "continueStartLostnum":this.continueStartLostnum,
+            "stopWingold":this.stopWingold,
+            "stopLosegold":this.stopLosegold
           }
         })
           .then(function (response) {
@@ -91,6 +101,10 @@
                 this.continueMaxMatch=data.continueMaxMatch;
                 if(data.continueStartLostnum)
                  this.continueStartLostnum=data.continueStartLostnum;
+                if(data.stopWingold)
+                  this.stopWingold=data.stopWingold;
+                if(data.stopLosegold)
+                  this.stopLosegold=data.stopLosegold;
               }
               if(data && data.isTest=='1'){
                 this.isTest = true;
