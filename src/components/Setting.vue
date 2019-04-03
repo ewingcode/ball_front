@@ -16,6 +16,9 @@
       <x-input title='连输第几场开始追加'  v-model="continueStartLostnum"></x-input>
     </group>
     <group >
+      <x-input title='追加策略金额(多场以逗号分隔)'  v-model="continuePlanMoney"></x-input>
+    </group>
+    <group >
       <x-input title='赢多少则停止下注'  v-model="stopWingold"></x-input>
     </group>
     <group >
@@ -46,7 +49,8 @@
         continueStartLostnum:"1",
         continueMaxMatch:"0",
         stopWingold:"0",
-        stopLosegold:"0"
+        stopLosegold:"0",
+        continuePlanMoney:""
 
       }
     },
@@ -75,7 +79,8 @@
             "continueMaxMatch":this.continueMaxMatch,
             "continueStartLostnum":this.continueStartLostnum,
             "stopWingold":this.stopWingold,
-            "stopLosegold":this.stopLosegold
+            "stopLosegold":this.stopLosegold,
+            "continuePlanMoney":this.continuePlanMoney
           }
         })
           .then(function (response) {
@@ -105,6 +110,8 @@
                   this.stopWingold=data.stopWingold;
                 if(data.stopLosegold)
                   this.stopLosegold=data.stopLosegold;
+                if(data.continuePlanMoney)
+                  this.continuePlanMoney=data.continuePlanMoney;
               }
               if(data && data.isTest=='1'){
                 this.isTest = true;
