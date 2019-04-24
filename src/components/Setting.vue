@@ -1,8 +1,11 @@
 <template>
   <div>
     <group>
-    <x-switch title="自动投注" v-model="autoBuyIsEff" @on-change="onchangeAutoBuyIsEff"></x-switch>
-  </group>
+      <popup-picker title="下注规则" :data="ruleNameList" v-model="ruleName"></popup-picker>
+    </group>
+    <group>
+      <x-switch title="自动投注" v-model="autoBuyIsEff" ></x-switch>
+    </group>
     <group >
       <x-input title='通知电话' type="tel" v-model="phone"></x-input>
     </group>
@@ -11,9 +14,6 @@
     </group>
     <group >
       <x-input title='追加场数'  v-model="continueMaxMatch"></x-input>
-    </group>
-    <group >
-      <x-input title='连输第几场开始追加'  v-model="continueStartLostnum"></x-input>
     </group>
     <group >
       <x-input title='追加策略金额(多场以逗号分隔)'  v-model="continuePlanMoney"></x-input>
@@ -27,18 +27,24 @@
     <group>
       <x-switch title="是否测试" v-model="isTest"></x-switch>
     </group>
+    <br>
+    <div class="picker-buttons">
+      <x-button type="primary" @click.native="save">保存设置</x-button>
+    </div>
+
   </div>
 </template>
 
 <script>
-  import { InlineXSwitch, XSwitch, Group,XInput } from 'vux'
+
+  import {   XSwitch,Divider,Group,XInput,PopupPicker,Picker,XButton,Cell, AlertModule, Alert, TransferDomDirective as TransferDom} from 'vux'
 
   export default {
+    directives: {
+      TransferDom
+    },
     components: {
-      InlineXSwitch,
-      XSwitch,
-      Group,
-      XInput
+      XSwitch,Divider,Group,XInput,PopupPicker,Picker,XButton,Cell, Alert
     },
     data () {
       return {
@@ -50,22 +56,24 @@
         continueMaxMatch:"0",
         stopWingold:"0",
         stopLosegold:"0",
-        continuePlanMoney:""
+        continuePlanMoney:"",
+        ruleName:[],
+        ruleNameList:[]
 
       }
     },
     created: function () {
       this.checkAccountStatus();
-     /* this.timer = setInterval(() => {
-        this.checkAccountStatus();
-      }, 3000)*/
+      /* this.timer = setInterval(() => {
+         this.checkAccountStatus();
+       }, 3000)*/
 
     }, methods: {
-      onchangeAutoBuyIsEff(value){
-        let iseff = value?'1':'0';
+      save(){
+        let iseff = this.autoBuyIsEff?'1':'0';
         let istest = this.isTest?'1':'0';
         if(this.money && this.money>2000){
-            return;
+          return;
         }
         this.axios({
           method: 'post',
@@ -80,11 +88,23 @@
             "continueStartLostnum":this.continueStartLostnum,
             "stopWingold":this.stopWingold,
             "stopLosegold":this.stopLosegold,
-            "continuePlanMoney":this.continuePlanMoney
+            "continuePlanMoney":this.continuePlanMoney,
+            "ruleName":this.ruleName[0]
           }
         })
           .then(function (response) {
-
+            let resp = response.data;
+            if(resp.code==200){
+              AlertModule.show({
+                title: "操作提示",
+                content:"保存成功"
+              });
+            } else{
+              AlertModule.show({
+                title: "操作提示",
+                content:"保存失败"
+              })
+            }
           }.bind(this));
       },
       checkAccountStatus(){
@@ -103,15 +123,24 @@
                 this.phone = data.phone;
                 this.money = data.money;
                 if(data.continueMaxMatch)
-                this.continueMaxMatch=data.continueMaxMatch;
+                  this.continueMaxMatch=data.continueMaxMatch;
                 if(data.continueStartLostnum)
-                 this.continueStartLostnum=data.continueStartLostnum;
+                  this.continueStartLostnum=data.continueStartLostnum;
                 if(data.stopWingold)
                   this.stopWingold=data.stopWingold;
                 if(data.stopLosegold)
                   this.stopLosegold=data.stopLosegold;
                 if(data.continuePlanMoney)
                   this.continuePlanMoney=data.continuePlanMoney;
+                if(data.ruleName) {
+                  this.ruleName=[];
+                  this.ruleName.push(data.ruleName);
+                }
+                if(data.ruleNameList){
+                  this.ruleNameList = [];
+                  this.ruleNameList.push(data.ruleNameList);
+                }
+
               }
               if(data && data.isTest=='1'){
                 this.isTest = true;
