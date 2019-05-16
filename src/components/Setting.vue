@@ -13,6 +13,9 @@
       <x-input title='投注金额'  v-model="money"></x-input>
     </group>
     <group >
+      <x-input title='每天最大下注场数'  v-model="maxEachDay"></x-input>
+    </group>
+    <group >
       <x-input title='追加场数'  v-model="continueMaxMatch"></x-input>
     </group>
     <group >
@@ -56,6 +59,7 @@
         continueMaxMatch:"0",
         stopWingold:"0",
         stopLosegold:"0",
+        maxEachDay:"3",
         continuePlanMoney:"",
         ruleName:[],
         ruleNameList:[]
@@ -89,7 +93,8 @@
             "stopWingold":this.stopWingold,
             "stopLosegold":this.stopLosegold,
             "continuePlanMoney":this.continuePlanMoney,
-            "ruleName":this.ruleName[0]
+            "ruleName":this.ruleName[0],
+            "maxEachDay":this.maxEachDay
           }
         })
           .then(function (response) {
@@ -130,6 +135,8 @@
                   this.stopWingold=data.stopWingold;
                 if(data.stopLosegold)
                   this.stopLosegold=data.stopLosegold;
+                if(data.maxEachDay)
+                  this.maxEachDay=data.maxEachDay;
                 if(data.continuePlanMoney)
                   this.continuePlanMoney=data.continuePlanMoney;
                 if(data.ruleName) {
