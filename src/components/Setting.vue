@@ -19,6 +19,9 @@
       <x-input title='追加场数'  v-model="continueMaxMatch"></x-input>
     </group>
     <group >
+      <x-input title='连赢N场等N场下注(赢输以逗号分隔)'  v-model="winRule"></x-input>
+    </group>
+    <group >
       <x-input title='追加策略金额(多场以逗号分隔)'  v-model="continuePlanMoney"></x-input>
     </group>
     <group >
@@ -62,7 +65,8 @@
         maxEachDay:"3",
         continuePlanMoney:"",
         ruleName:[],
-        ruleNameList:[]
+        ruleNameList:[],
+        winRule:""
 
       }
     },
@@ -94,7 +98,8 @@
             "stopLosegold":this.stopLosegold,
             "continuePlanMoney":this.continuePlanMoney,
             "ruleName":this.ruleName[0],
-            "maxEachDay":this.maxEachDay
+            "maxEachDay":this.maxEachDay,
+            "winRule":this.winRule
           }
         })
           .then(function (response) {
@@ -139,6 +144,8 @@
                   this.maxEachDay=data.maxEachDay;
                 if(data.continuePlanMoney)
                   this.continuePlanMoney=data.continuePlanMoney;
+                if(data.winRule)
+                  this.winRule=data.winRule;
                 if(data.ruleName) {
                   this.ruleName=[];
                   this.ruleName.push(data.ruleName);
